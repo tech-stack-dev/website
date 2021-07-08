@@ -60,7 +60,10 @@ const getNakedDomain = (domain) => {
     throw new Error(`"${domain}" is not a valid domain.`)
   }
 
-  const nakedDomain = `${parsedDomain.domain}.${parsedDomain.topLevelDomains.join('.')}`
+  let nakedDomain = `${parsedDomain.domain}.${parsedDomain.topLevelDomains.join('.')}`
+  if (parsedDomain.subDomains && parsedDomain.subDomains.length > 1) {
+    nakedDomain = `${parsedDomain.subDomains[parsedDomain.subDomains.length - 1]}.${nakedDomain}`
+  }
   return nakedDomain
 }
 
